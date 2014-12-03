@@ -37,7 +37,7 @@ test$workingday <- factor(test$workingday)
 test$season <- factor(test$season)
 ```
 
-I liked brandon's approach of creating new features, so followed his approach. Here's the link <a 
+I liked brandon's approach of creating new features, so i followed his approach. Here's the link <a 
 https://github.com/namebrandon/kaggle-bike-sharing/blob/master/kaggle-bike-challenge.R> here <a/>.
 ```{r, echo=TRUE}
 #create time column by stripping out timestamp
@@ -95,6 +95,9 @@ ctree.model <- ctree(formula, data = train_v)
 ctree_pred <- predict(ctree.model, newdata = test_v)
 sse = sum((test_v$count - ctree_pred)^2)
 sst = sum((test_v$count - mean(train_v$count))^2)
+```
+the accuracy of above model is 
+```{r}
 1-sse/sst # in-sample accuracy
 ```
 lets now improve the model using different parametrs.
@@ -106,6 +109,9 @@ ctree.model1 <- ctree(formula, data=train_v, controls = ctree_control(teststat =
 ctree_pred <- predict(ctree.model1, newdata = test_v)
 sse = sum((test_v$count - ctree_pred)^2)
 sst = sum((test_v$count - mean(train_v$count))^2)
+```
+the accuracy of above model is 
+```{r}
 1-sse/sst # in-sample accuracy
 ```
 

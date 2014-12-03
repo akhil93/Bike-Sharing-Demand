@@ -94,7 +94,7 @@ train$season &lt;- factor(train$season)</code></pre>
 test$holiday &lt;- factor(test$holiday)
 test$workingday &lt;- factor(test$workingday)
 test$season &lt;- factor(test$season)</code></pre>
-<p>I liked brandon’s approach of creating new features, so followed his approach. Here’s the link <a https: github.com namebrandon kaggle-bike-sharing blob master kaggle-bike-challenge.R> here <a></a>.</p>
+<p>I liked brandon’s approach of creating new features, so i followed his approach. Here’s the link <a https: github.com namebrandon kaggle-bike-sharing blob master kaggle-bike-challenge.R> here <a></a>.</p>
 <pre class="r"><code>#create time column by stripping out timestamp
 train$time &lt;- substring(train$datetime,12,20)
 test$time &lt;- substring(test$datetime,12,20)
@@ -145,9 +145,10 @@ formula &lt;- count ~ season + holiday + workingday + weather + temp + atemp + h
 ctree.model &lt;- ctree(formula, data = train_v)
 ctree_pred &lt;- predict(ctree.model, newdata = test_v)
 sse = sum((test_v$count - ctree_pred)^2)
-sst = sum((test_v$count - mean(train_v$count))^2)
-1-sse/sst # in-sample accuracy</code></pre>
-<pre><code>## [1] 0.802097</code></pre>
+sst = sum((test_v$count - mean(train_v$count))^2)</code></pre>
+<p>the accuracy of above model is</p>
+<pre class="r"><code>1-sse/sst # in-sample accuracy</code></pre>
+<pre><code>## [1] 0.820597</code></pre>
 <p>lets now improve the model using different parametrs.</p>
 <pre class="r"><code>library(party)
 ctree.model1 &lt;- ctree(formula, data=train_v, controls = ctree_control(teststat = &quot;quad&quot;,
@@ -155,8 +156,9 @@ ctree.model1 &lt;- ctree(formula, data=train_v, controls = ctree_control(teststa
                      mincriterion = 0.84))
 ctree_pred &lt;- predict(ctree.model1, newdata = test_v)
 sse = sum((test_v$count - ctree_pred)^2)
-sst = sum((test_v$count - mean(train_v$count))^2)
-1-sse/sst # in-sample accuracy</code></pre>
+sst = sum((test_v$count - mean(train_v$count))^2)</code></pre>
+<p>the accuracy of above model is</p>
+<pre class="r"><code>1-sse/sst # in-sample accuracy</code></pre>
 <pre><code>## [1] 0.823891</code></pre>
 </div>
 </div>
